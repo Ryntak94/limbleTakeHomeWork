@@ -1,6 +1,6 @@
 <div>
   <app-commentList [comments]="comments"></app-commentList>
   <app-userList></app-userList>
-  <textarea cols="50" rows="4" [(ngModel)]="comment" ></textarea>
+  <textarea cols="50" rows="4" value="{{comment}}" (keyup)="taggingUser($event)" (mouseup)="taggingUser($event)"></textarea>
   <button (click)="submitComment()">Submit</button>
 </div>
