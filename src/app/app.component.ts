@@ -11,8 +11,8 @@ import { CommentListComponent } from './components/commentList/commentList.compo
 export class AppComponent {
 
   userListEnabled: boolean = false;
-  comment: String = "";
-  comments: String[] = [];
+  comment: string = "";
+  comments: string[] = [];
 
   submitComment() {
     this.comments.push(this.comment);

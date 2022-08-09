@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-commentList',
-  templateUrl: './commentList.component.html',
-  styleUrls: ['./commentList.component.css']
+  selector: 'app-comment',
+  templateUrl: './comment.component.html',
+  styleUrls: ['./comment.component.css']
 })
 
-export class CommentListComponent {
-    @Input() comments: String[] = [];
+export class CommentComponent {
+    @Input() comment?: string;
 }

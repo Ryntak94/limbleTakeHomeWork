@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CommentComponent } from '../comment/comment.component'
 
 @Component({
   selector: 'app-commentList',
@@ -7,5 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 
 export class CommentListComponent {
-    @Input() comments: String[] = [];
+    @Input() comments: string[] = [];
 }
