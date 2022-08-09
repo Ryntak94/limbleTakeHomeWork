@@ -7,6 +7,7 @@ import { UserListComponent } from './components/userList/userList.component';
 import { CommentListComponent } from './components/commentList/commentList.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { UserComponent } from './components/user/user.component';
+import { CommentService } from './services/comment.service';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { UserComponent } from './components/user/user.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [CommentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

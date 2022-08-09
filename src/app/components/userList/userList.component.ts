@@ -9,6 +9,5 @@ import { User } from 'src/app/types/User';
 })
 
 export class UserListComponent {
-  @Input() enabled?: boolean;
   @Input() users: User[] = [];
 }

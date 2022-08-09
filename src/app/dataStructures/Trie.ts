@@ -5,7 +5,7 @@ export class Trie {
 
     constructor(users?: User[])   {
         for(const user of users!)  {
-            this.root.insert(user, user.name);
+            this.root.insert(user, user.name.toLowerCase());
         }
     }
 
@@ -30,7 +30,7 @@ class Node {
             this.isUser = true;
             this.children[26] = [...this.children[26], user];
         } else {
-            let char = name.slice(0,1).toLowerCase();
+            let char = name.slice(0,1);
             let charAsIndx = char.charCodeAt(0) - 97
             let subStr = name.slice(1);
             if(this.children[charAsIndx] === undefined) {
@@ -41,11 +41,8 @@ class Node {
     }
 
     filteredDFS(filterStr: string): User[]  {
-        console.log(filterStr)
         if(filterStr.length === 0)  {
-            const users = this.DFS();
-            console.log(users)
-            return users;
+            return this.DFS();
         } else {
             let char = filterStr.slice(0,1).toLowerCase();
             let charAsIndx = char.charCodeAt(0) - 97;
@@ -57,19 +54,17 @@ class Node {
 
     DFS(): User[]   {
         let users: User[] = [];
+        
         for(let indx = 0; indx < 26; indx++)    {
             if(this.children[indx]  !== undefined)  {
                 users = [...users, ...this.children[indx].DFS()];
             }
         }
+
         if(this.isUser) {
-            for(const user of this.children[26])    {
-                let u: User = user
-                users.push(u)
-            }
+            users = [...users, ...this.children[26]]
         }
         
-        console.log(users)
         return users;
     }
 

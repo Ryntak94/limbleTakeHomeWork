@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommentService } from 'src/app/services/comment.service';
 import { User } from 'src/app/types/User';
 
 @Component({
@@ -9,4 +10,12 @@ import { User } from 'src/app/types/User';
 
 export class UserComponent {
     @Input() user?: User;
+    @Output() selectedUser = new EventEmitter<User>();
+
+    constructor(private commentService: CommentService) {}
+
+    tagUser() {
+      this.commentService.selectUser(this.user!);
+    }
+
 }
