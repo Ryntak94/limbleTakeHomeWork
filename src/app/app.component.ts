@@ -14,12 +14,7 @@ export class AppComponent {
   userListEnabled: boolean = false;
   comment: string = "";
   comments: string[] = [];
-  users: User[] = [
-    {id: 1, name: 'Kevin'},
-    {id: 2, name: 'Jeff'},
-    {id: 3, name: 'Bryan'},
-    {id: 4, name: 'Gabbey'}
-  ];
+  tag: string = "";
 
   submitComment() {
     this.comments.push(this.comment);
@@ -31,24 +26,28 @@ export class AppComponent {
     let caretPosition: number = event.target.selectionStart;
     let tags: string[] | null = this.comment.match(/(\@[^\@])\w+/g);
     let indices: number[][] = [];
+    let inRange: boolean = false;
     
     if(tags !== null) {
       indices = tags.map(match =>  {
-        let startIdx = this.comment.indexOf(match)
-        let endIdx = startIdx + match.length;
-        console.log(match.slice(0, endIdx - startIdx))
+        let startIdx: number = this.comment.indexOf(match)
+        let endIdx: number = startIdx + match.length;
         return [startIdx, endIdx];
       })
     }
 
     for(let range of indices) {
-      let startIdx = range[0];
-      let endIdx = range[1];
+      let [startIdx, endIdx] = range;
+      
       if(startIdx < caretPosition && caretPosition <= endIdx) {
-        console.log(range)
+        this.tag = this.comment.slice(startIdx, endIdx);
+        inRange = true;
+        this.userListEnabled = true;
         break;
       }
     }
+
+    if(!inRange) this.userListEnabled = false;
 
     console.log(indices)
   }

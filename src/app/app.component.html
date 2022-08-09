@@ -1,6 +1,8 @@
 <div>
   <app-commentList [comments]="comments"></app-commentList>
-  <app-userList></app-userList>
+  <div *ngIf="userListEnabled">
+    <app-userList tag="tag"></app-userList>
+  </div>
   <textarea cols="50" rows="4" value="{{comment}}" (keyup)="taggingUser($event)" (mouseup)="taggingUser($event)"></textarea>
   <button (click)="submitComment()">Submit</button>
 </div>

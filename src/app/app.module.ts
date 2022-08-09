@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { UserListComponent } from './components/userList/userList.component';
 import { CommentListComponent } from './components/commentList/commentList.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { UserComponent } from './components/user/user.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { CommentComponent } from './components/comment/comment.component';
     AppComponent,
     UserListComponent,
     CommentListComponent,
-    CommentComponent
+    CommentComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
