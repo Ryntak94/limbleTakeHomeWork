@@ -10,11 +10,5 @@ import { User } from 'src/app/types/User';
 
 export class UserListComponent {
   @Input() enabled?: boolean;
-  users: User[] = [
-    {id: 1, name: 'Kevin'},
-    {id: 2, name: 'Jeff'},
-    {id: 3, name: 'Bryan'},
-    {id: 4, name: 'Gabbey'}
-  ];
-  filteredUsers: User[] = this.users;
+  @Input() users: User[] = [];
 }
