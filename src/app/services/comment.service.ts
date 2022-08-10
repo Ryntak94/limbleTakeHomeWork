@@ -10,4 +10,19 @@ export class CommentService {
     selectUser(user: User)  {
         this.userSelected.emit(user);
     }
+
+    emitUpdateComment = new EventEmitter<any>()
+
+    updateComment(event: any)   {
+        this.emitUpdateComment.emit(event)
+    }
+
+    emitCancelTag = new EventEmitter<any>()
+
+    cancelTag() {
+        this.emitCancelTag.emit()
+    }
+
+    
+
 }

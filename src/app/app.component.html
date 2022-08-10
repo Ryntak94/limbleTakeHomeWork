@@ -3,6 +3,6 @@
   <div *ngIf="userListEnabled">
     <app-userList [users]="filteredUsers"></app-userList>
   </div>
-  <textarea #commentBox cols="50" rows="4" value="{{comment}}" (keydown)="onKeyHandler($event)" (mouseup)="taggingUser($event)"></textarea>
+  <textarea #commentBox cols="50" rows="4" value="{{comment}}" (keyup)="checkForTaggingUser($event)" (mouseup)="checkForTaggingUser($event)" (click)="refocus($event)"></textarea>
   <button (click)="submitComment()">Submit</button>
 </div>
