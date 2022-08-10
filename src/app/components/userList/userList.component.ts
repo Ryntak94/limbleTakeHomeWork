@@ -102,4 +102,9 @@ export class UserListComponent implements OnChanges {
     }
       this.displayedUsers = this.users.slice(this.displayedRange[0], this.displayedRange[1]);
   }
+
+  tagUser(event: any) {
+    let userIndx = event.currentTarget.id
+    this.commentService.selectUser(this.users[userIndx]);
+  }
 }

@@ -84,6 +84,10 @@ export class AppComponent implements OnInit {
       } else {
         this.filteredUsers = this.userTrie.filteredList(this.tag.slice(1))
       }
+      if(this.filteredUsers.length === 0) {
+        event.preventDefault();
+        this.commentBox?.nativeElement.focus()
+      }
     })
 
     this.commentService.emitCancelTag.subscribe(event =>  {

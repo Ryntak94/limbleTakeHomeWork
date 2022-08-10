@@ -14,8 +14,4 @@ export class UserComponent {
 
     constructor(private commentService: CommentService) {}
 
-    tagUser() {
-      this.commentService.selectUser(this.user!);
-    }
-
 }

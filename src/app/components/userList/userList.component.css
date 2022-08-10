@@ -1,5 +1,5 @@
 .selected {
-    background-color: rgb(59, 201, 201);
+    background-color: #2596be;
 }
 .userList   {
     display: flex;
@@ -27,4 +27,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.user:hover {
+    cursor: pointer;
+    background-color: #2596be;
 }
