@@ -17,11 +17,17 @@ export class AppComponent implements OnInit {
   userListEnabled: boolean = false;
   comment: string = "";
   comments: string[] = [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    "Sed ut perspiciatis unde omnis",
-    "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give",
-    "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi",
-    "<b>@Alexander Hamilton</b>, do you have the votes?"
+    "<b>@Kevin</b>, when's your next netflix special?",
+    "Who is&nbsp;<b>@Jeff</b>&nbsp;and why is he so famous?",
+    "<b>@Bryan</b>, could you fetch me an erlenmeyer flask, please?",
+    "<b>@Gabbey</b> is one of the greatest gymnasts of our time!",
+    "<b>@Kerry</b> gives amazing monologues in Scandal",
+    "<b>@Kaleia</b>&nbsp;who? You're not my fiancee!",
+    "<b>@Ryan</b>: Limble's newest hire!",
+    "<b>@Ian</b>- I mean Gandalf!",
+    "<b>@Adam</b> is one of the greatest gymnasts of our time!",
+    "<b>@James Madison</b>: \"It's crazy that the guy who comes in second becomes vice President.",
+    "<b>@Alexander Hamilton</b>, do you have the votes?",
   ];
   tag: string = "";
   tagIdx?: number;
@@ -155,14 +161,16 @@ export class AppComponent implements OnInit {
     let formattedComment = this.comment
     this.comment = "";
     for(let i = this.taggedUsers.length - 1; i >= 0; i--) {
-      formattedComment = formattedComment.slice(0, this.tagIndices[i]) + formattedComment.slice(this.tagIndices[i]).replace(`@${this.taggedUsers[i].name}`, `<b>@${this.taggedUsers[i].name}</b>`).replace('</b> ', '</b>&nbsp')
+      if(this.taggedUsers[i] !== undefined && this.taggedUsers[i] !== null) {
+        formattedComment = formattedComment.slice(0, this.tagIndices[i]) + formattedComment.slice(this.tagIndices[i]).replace(`@${this.taggedUsers[i].name}`, `<b>@${this.taggedUsers[i].name}</b>`).replace('</b> ', '</b>&nbsp').replace(' <b>', '&nbsp;<b>')
+      }
     }
     console.log(formattedComment)
     this.comments.push(formattedComment);
     let taggedUsersSet = new Set();
     this.userListEnabled = false;
     for(const user of this.taggedUsers) {
-      if(!taggedUsersSet.has(user.id))  {
+      if(user !== undefined && user !== null && !taggedUsersSet.has(user.id))  {
         taggedUsersSet.add(user.id)
         alert(user.name + ", " + user.id)
       }
