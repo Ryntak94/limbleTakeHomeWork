@@ -38,7 +38,8 @@ export class UserListComponent implements OnChanges {
     "ContextMenu",
     "Meta",
     "Delete",
-    "ArrowLeft"
+    "ArrowLeft",
+    "Insert"
   ]
 
   constructor(private commentService: CommentService) {
