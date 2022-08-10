@@ -159,11 +159,13 @@ export class AppComponent implements OnInit {
     }
     console.log(formattedComment)
     this.comments.push(formattedComment);
-    
+    let taggedUsersSet = new Set();
     this.userListEnabled = false;
     for(const user of this.taggedUsers) {
-      
-      alert(user.name + ", " + user.id)
+      if(!taggedUsersSet.has(user.id))  {
+        taggedUsersSet.add(user.id)
+        alert(user.name + ", " + user.id)
+      }
     }
     this.taggedUsers = [];
   }
