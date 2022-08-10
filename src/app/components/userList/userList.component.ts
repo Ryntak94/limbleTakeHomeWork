@@ -1,4 +1,4 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, HostListener, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { UserComponent } from '../user/user.component';
 import { User } from 'src/app/types/User';
 import { CommentService } from 'src/app/services/comment.service';
@@ -9,9 +9,12 @@ import { CommentService } from 'src/app/services/comment.service';
   styleUrls: ['./userList.component.css']
 })
 
-export class UserListComponent {
+export class UserListComponent implements OnChanges {
   @Input() users: User[] = [];
+  public displayedUsers?: User[];
   public selected: number = 0;
+  public displayedSelected: number = 0;
+  public displayedRange: number[] = [0,5]
   public keysToIgnore: string[] = [
     "F1",
     "F2",
@@ -38,17 +41,45 @@ export class UserListComponent {
     "ArrowLeft"
   ]
 
-  constructor(private commentService: CommentService) {}
+  constructor(private commentService: CommentService) {
+
+  }
   @HostListener('document:keydown', ['$event'])
   test(event: any)  {
-    console.log(event)
     if(event.key === "ArrowUp") {
       event.preventDefault()
-      this.selected !== 0 ? this.selected-- : this.selected = this.users.length - 1;
+      if(this.selected === 0) {
+        this.displayedSelected = 4
+        this.selected = this.users.length - 1;
+        this.displayedRange = [this.users.length - 5, this.users.length]
+      } else {
+        this.selected--;
+        if(this.displayedSelected === 0)  {
+          this.displayedRange[0]--
+          this.displayedRange[1]--
+        } else {
+          this.displayedSelected--;
+        }
+      }
+      this.updateList()
     } else if(event.key === "ArrowDown")  {
       event.preventDefault()
-      this.selected !== this.users.length - 1 ? this.selected++ : this.selected = 0;
-    } else if(event.key === "Enter" || event.key === "ArrowRight" || event.key === " " || event.key === "Tab")  {
+      if(this.selected === this.users.length - 1) {
+        this.displayedSelected = 0
+        this.selected = 0;
+        this.displayedRange = [0, 5]
+      } else {
+        this.selected++;
+        if(this.displayedSelected === 4)  {
+          this.displayedRange[0]++
+          this.displayedRange[1]++
+        } else {
+          this.displayedSelected++;
+        }
+      }
+      this.updateList()
+      console.log(this.selected, this.displayedSelected)
+    } else if(event.key === "Enter" || event.key === "ArrowRight" || event.key === "Tab")  {
       event.preventDefault()
       this.commentService.selectUser(this.users[this.selected]);
     } else  if(event.key === "Escape")  {
@@ -59,5 +90,16 @@ export class UserListComponent {
       console.log('here')
       this.commentService.updateComment(event)
     }
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    this.updateList();
+  }
+
+  updateList()  {
+    if(this.users.length < 5) {
+      this.displayedRange = [0, 5]
+      this.displayedSelected = this.selected
+    }
+      this.displayedUsers = this.users.slice(this.displayedRange[0], this.displayedRange[1]);
   }
 }

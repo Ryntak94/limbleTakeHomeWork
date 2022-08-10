@@ -1,3 +1,18 @@
 .selected {
-    background-color: #ffb6c1;
+    background-color: rgb(59, 201, 201);
+}
+.userList   {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    text-align: end;
+    position: absolute;
+    background-color: antiquewhite;
+    max-height: 90px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    transform: translateY(-100%) ;
+}
+.userList::-webkit-scrollbar   {
+    display: none;
 }

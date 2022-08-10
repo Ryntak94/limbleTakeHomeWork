@@ -5,12 +5,12 @@ export class Trie {
 
     constructor(users?: User[])   {
         for(const user of users!)  {
-            this.root.insert(user, user.name.toLowerCase());
+            this.root.insert(user, user.name.toLowerCase().split(" ").join(""));
         }
     }
 
     filteredList(filterStr: string)  {
-        return this.root.filteredDFS(filterStr)
+        return this.root.filteredDFS(filterStr.split(" ").join(""))
     }
 
 }

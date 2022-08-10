@@ -1,1 +1,3 @@
-<app-user *ngFor="let user of users; let i = index" [user]="user" [ngClass]="{selected:selected==i}"></app-user>
+<div class="userList">
+    <app-user *ngFor="let user of displayedUsers; let i = index" [user]="user" [ngClass]="{selected:displayedSelected==i}"></app-user>
+</div>
