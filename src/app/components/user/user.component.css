@@ -1,4 +1,10 @@
 span    {
     caret-color: transparent;
-    padding-right: 15px;
+    padding-right: 15px;   
+}
+
+img {
+    width: 20px;
+    height: 20px;
+    padding-left: 15px;
 }

@@ -6,13 +6,25 @@
     flex-direction: column;
     width: 200px;
     text-align: end;
-    position: absolute;
-    background-color: antiquewhite;
-    max-height: 90px;
+    position: fixed;
+    background-color: white;
+    max-height: 150px;
     overflow-y: auto;
     scrollbar-width: none;
-    transform: translateY(-100%) ;
+    transform: translate(-201%, -100%);
+    opacity: 100%;
+    border: solid 1px lightgrey;
+    border-top-left-radius:  5px;
+    border-top-right-radius: 5px;
+    
 }
 .userList::-webkit-scrollbar   {
     display: none;
+}
+
+.user   {
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

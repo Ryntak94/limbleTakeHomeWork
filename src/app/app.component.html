@@ -1,8 +1,10 @@
 <div>
   <app-commentList [comments]="comments"></app-commentList>
-  <div *ngIf="userListEnabled">
-    <app-userList [users]="filteredUsers"></app-userList>
+  <div class="form">
+    <div *ngIf="userListEnabled">
+      <app-userList [users]="filteredUsers"></app-userList>
+    </div>
+    <textarea #commentBox cols="50" rows="4" value="{{comment}}" (keyup)="checkForTaggingUser($event)" (mouseup)="checkForTaggingUser($event)" (click)="refocusOnClick($event)"></textarea>
+    <button (click)="submitComment()">Submit</button>
   </div>
-  <textarea #commentBox cols="50" rows="4" value="{{comment}}" (keyup)="checkForTaggingUser($event)" (mouseup)="checkForTaggingUser($event)" (click)="refocusOnClick($event)"></textarea>
-  <button (click)="submitComment()">Submit</button>
 </div>
