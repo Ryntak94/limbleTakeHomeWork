@@ -49,7 +49,6 @@ export class UserListComponent implements OnChanges {
   @HostListener('wheel', ['$event'])
   scrollHandler(event: any)  {
     event.preventDefault();
-    console.log(event.deltaY);
     if(event.deltaY < 0) {
       this.upHandler(event)
     } else {
@@ -72,7 +71,6 @@ export class UserListComponent implements OnChanges {
     } else if (this.keysToIgnore.includes(event.key))  {
       event.preventDefault();
     } else {
-      console.log('here')
       this.commentService.updateComment(event)
     }
   }

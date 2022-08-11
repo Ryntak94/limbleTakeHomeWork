@@ -76,7 +76,6 @@ export class AppComponent implements OnInit {
       } else {
         this.updateTag(this.tag + event.key);
         this.tag+= event.key
-        console.log(event)
 
       }
       if(this.tag === "") {
@@ -119,7 +118,6 @@ export class AppComponent implements OnInit {
   getIndices(tags: string[])  {
     let lastIdx: number = 0;
     return tags.map(match =>  {
-      console.log(this.comment.slice(lastIdx))
       let startIdx: number = this.comment.slice(lastIdx).indexOf(match) + lastIdx;
       let endIdx: number = startIdx + match.length;
       lastIdx = endIdx;
@@ -128,19 +126,15 @@ export class AppComponent implements OnInit {
   }
 
   selectCurrentTagOrNull(caretPosition: number, indices: number[][]) {
-    console.log(1)
     let tagging = false;
     for(let range of indices) {
       let [startIdx, endIdx] = range;
-      console.log(2)
       if(startIdx < caretPosition && caretPosition <= endIdx) {
         this.tag = this.comment.slice(startIdx, endIdx);
         this.tagIdx = startIdx;
         tagging = true;
         this.filteredUsers = this.userTrie.filteredList(this.tag.slice(1))
-        console.log(3)
         if(this.filteredUsers.length > 0) {
-          console.log(4)
           this.userListEnabled = true;
           this.commentBox?.nativeElement.blur()
         }
@@ -168,17 +162,13 @@ export class AppComponent implements OnInit {
       if(this.taggedUsers[i] !== undefined && this.taggedUsers[i] !== null) {
         formattedComment = formattedComment.slice(0, this.tagIndices[i]) + formattedComment.slice(this.tagIndices[i]).replace(`@${this.taggedUsers[i].name}`, `<b>@${this.taggedUsers[i].name}</b>`);
       }
-      console.log(formattedComment)
     }
     formattedComment = formattedComment.replaceAll(' ', '&nbsp;')
-    console.log(this.comments)
-    console.log(formattedComment)
     this.comments.push(formattedComment);
     this.userListEnabled = false;
     let taggedUsersSet = new Set();
     for(const user of this.taggedUsers) {
       if(user !== undefined && user !== null && !taggedUsersSet.has(user.id))  {
-        console.log(user)
         taggedUsersSet.add(user.id)
         alert(user.name + ", " + user.id)
       }
