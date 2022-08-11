@@ -166,9 +166,12 @@ export class AppComponent implements OnInit {
     this.comment = "";
     for(let i = this.taggedUsers.length - 1; i >= 0; i--) {
       if(this.taggedUsers[i] !== undefined && this.taggedUsers[i] !== null) {
-        formattedComment = formattedComment.slice(0, this.tagIndices[i]) + formattedComment.slice(this.tagIndices[i]).replace(`@${this.taggedUsers[i].name}`, `<b>@${this.taggedUsers[i].name}</b>`).replace('</b> ', '</b>&nbsp').replace(' <b>', '&nbsp;<b>')
+        formattedComment = formattedComment.slice(0, this.tagIndices[i]) + formattedComment.slice(this.tagIndices[i]).replace(`@${this.taggedUsers[i].name}`, `<b>@${this.taggedUsers[i].name}</b>`);
       }
+      console.log(formattedComment)
     }
+    formattedComment = formattedComment.replaceAll(' ', '&nbsp;')
+    console.log(this.comments)
     console.log(formattedComment)
     this.comments.push(formattedComment);
     this.userListEnabled = false;
