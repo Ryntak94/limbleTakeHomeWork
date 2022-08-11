@@ -20,12 +20,12 @@ export class AppComponent implements OnInit {
     "<b>@Kevin</b>, when's your next netflix special?",
     "Who is&nbsp;<b>@Jeff</b>&nbsp;and why is he so famous?",
     "<b>@Bryan</b>, could you fetch me an erlenmeyer flask, please?",
-    "<b>@Gabbey</b> is one of the greatest gymnasts of our time!",
-    "<b>@Kerry</b> gives amazing monologues in Scandal",
+    "<b>@Gabbey</b>&nbsp;is one of the greatest gymnasts of our time!",
+    "<b>@Kerry</b>&nbsp;gives amazing monologues in Scandal",
     "<b>@Kaleia</b>&nbsp;who? You're not my fiancee!",
     "<b>@Ryan</b>: Limble's newest hire!",
     "<b>@Ian</b>- I mean Gandalf!",
-    "<b>@Adam</b> is one of the greatest gymnasts of our time!",
+    "<b>@Adam</b>&nbsp;is one of the greatest gymnasts of our time!",
     "<b>@James Madison</b>: \"It's crazy that the guy who comes in second becomes vice President.",
     "<b>@Alexander Hamilton</b>, do you have the votes?",
   ];
@@ -171,10 +171,11 @@ export class AppComponent implements OnInit {
     }
     console.log(formattedComment)
     this.comments.push(formattedComment);
-    let taggedUsersSet = new Set();
     this.userListEnabled = false;
+    let taggedUsersSet = new Set();
     for(const user of this.taggedUsers) {
       if(user !== undefined && user !== null && !taggedUsersSet.has(user.id))  {
+        console.log(user)
         taggedUsersSet.add(user.id)
         alert(user.name + ", " + user.id)
       }
