@@ -1,6 +1,3 @@
-.selected {
-    background-color: #2596be;
-}
 .userList   {
     display: flex;
     flex-direction: column;
@@ -31,5 +28,9 @@
 
 .user:hover {
     cursor: pointer;
+    background-color: #17617c;
+}
+
+.selected {
     background-color: #2596be;
 }

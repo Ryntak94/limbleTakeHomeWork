@@ -45,41 +45,25 @@ export class UserListComponent implements OnChanges {
   constructor(private commentService: CommentService) {
 
   }
+
+  @HostListener('wheel', ['$event'])
+  scrollHandler(event: any)  {
+    event.preventDefault();
+    console.log(event.deltaY);
+    if(event.deltaY < 0) {
+      this.upHandler(event)
+    } else {
+      this.downHandler(event)
+    }
+  }
+
+
   @HostListener('document:keydown', ['$event'])
-  test(event: any)  {
+  keydownHandler(event: any)  {
     if(event.key === "ArrowUp") {
-      event.preventDefault()
-      if(this.selected === 0) {
-        this.displayedSelected = 4
-        this.selected = this.users.length - 1;
-        this.displayedRange = [this.users.length - 5, this.users.length]
-      } else {
-        this.selected--;
-        if(this.displayedSelected === 0)  {
-          this.displayedRange[0]--
-          this.displayedRange[1]--
-        } else {
-          this.displayedSelected--;
-        }
-      }
-      this.updateList()
+      this.upHandler(event)
     } else if(event.key === "ArrowDown")  {
-      event.preventDefault()
-      if(this.selected === this.users.length - 1) {
-        this.displayedSelected = 0
-        this.selected = 0;
-        this.displayedRange = [0, 5]
-      } else {
-        this.selected++;
-        if(this.displayedSelected === 4)  {
-          this.displayedRange[0]++
-          this.displayedRange[1]++
-        } else {
-          this.displayedSelected++;
-        }
-      }
-      this.updateList()
-      console.log(this.selected, this.displayedSelected)
+      this.downHandler(event)
     } else if(event.key === "Enter" || event.key === "ArrowRight" || event.key === "Tab")  {
       event.preventDefault()
       this.commentService.selectUser(this.users[this.selected]);
@@ -107,5 +91,41 @@ export class UserListComponent implements OnChanges {
   tagUser(event: any) {
     let userIndx = event.currentTarget.id
     this.commentService.selectUser(this.users[userIndx]);
+  }
+
+  upHandler(event: any)  {
+    event.preventDefault()
+    if(this.selected === 0) {
+      this.displayedSelected = 4
+      this.selected = this.users.length - 1;
+      this.displayedRange = [this.users.length - 5, this.users.length]
+    } else {
+      this.selected--;
+      if(this.displayedSelected === 0)  {
+        this.displayedRange[0]--
+        this.displayedRange[1]--
+      } else {
+        this.displayedSelected--;
+      }
+    }
+    this.updateList()
+  }
+
+  downHandler(event: any) {
+    event.preventDefault()
+    if(this.selected === this.users.length - 1) {
+      this.displayedSelected = 0
+      this.selected = 0;
+      this.displayedRange = [0, 5]
+    } else {
+      this.selected++;
+      if(this.displayedSelected === 4)  {
+        this.displayedRange[0]++
+        this.displayedRange[1]++
+      } else {
+        this.displayedSelected++;
+      }
+    }
+    this.updateList()
   }
 }
