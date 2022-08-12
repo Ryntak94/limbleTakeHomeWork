@@ -3,12 +3,12 @@
     flex-direction: column;
     width: 200px;
     text-align: end;
-    position: fixed;
+    position: absolute;
     background-color: white;
     max-height: 150px;
     overflow-y: auto;
     scrollbar-width: none;
-    transform: translate(-201%, -100%);
+    transform: translate(-199%, -90%);
     opacity: 100%;
     border: solid 1px lightgrey;
     border-top-left-radius:  5px;
@@ -28,9 +28,5 @@
 
 .user:hover {
     cursor: pointer;
-    background-color: #17617c;
-}
-
-.selected {
-    background-color: #2596be;
+    background-color: #f90;
 }

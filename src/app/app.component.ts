@@ -24,14 +24,14 @@ export class AppComponent implements OnInit {
     "<b>@Kerry</b>&nbsp;gives amazing monologues in Scandal",
     "<b>@Kaleia</b>&nbsp;who? You're not my fiancee!",
     "<b>@Ryan</b>: Limble's newest hire!",
-    "<b>@Ian</b>- I mean Gandalf!",
+    "<b>@Ian</b>&nbsp;- I mean Gandalf!",
     "<b>@Adam</b>&nbsp;is one of the greatest gymnasts of our time!",
     "<b>@James Madison</b>: \"It's crazy that the guy who comes in second becomes vice President.",
     "<b>@Alexander Hamilton</b>, do you have the votes?",
   ];
   tag: string = "";
   tagIdx?: number;
-  taggedUsers: User[] = [];
+  taggedUsers = new Set<User>();
   tagIndices: number[] = []
   users: User[] = [
     {id: 1, name: 'Kevin', imgSrc: 'https://www.biography.com/.image/t_share/MTQzMzA3MjQ0MzI5NTEwNDcx/kevin-hart_gettyimages-450909048jpg.jpg'},
@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
       if(user) this.finalizeTag(user);
       this.userListEnabled = false;
       this.commentBox?.nativeElement.focus();
-      this.taggedUsers.push(user)
+      if(!this.taggedUsers.has(user)) this.taggedUsers.add(user)
       this.tagIndices.push(this.tagIdx!)
     })
 
@@ -111,7 +111,7 @@ export class AppComponent implements OnInit {
       indices = this.getIndices(tags)
     }
 
-    if(indices.length > 0) tagging = this.selectCurrentTagOrNull(caretPosition, indices);
+    if(indices.length > 0) tagging = this.selectCurrentTagOrNull(caretPosition, indices, event);
     if(!tagging) this.userListEnabled = false;
   }
 
@@ -125,8 +125,9 @@ export class AppComponent implements OnInit {
     })
   }
 
-  selectCurrentTagOrNull(caretPosition: number, indices: number[][]) {
+  selectCurrentTagOrNull(caretPosition: number, indices: number[][], event: any) {
     let tagging = false;
+    if(event.key === "Enter") return tagging
     for(let range of indices) {
       let [startIdx, endIdx] = range;
       if(startIdx < caretPosition && caretPosition <= endIdx) {
@@ -136,7 +137,6 @@ export class AppComponent implements OnInit {
         this.filteredUsers = this.userTrie.filteredList(this.tag.slice(1))
         if(this.filteredUsers.length > 0) {
           this.userListEnabled = true;
-          this.commentBox?.nativeElement.blur()
         }
         break;
       }
@@ -157,23 +157,22 @@ export class AppComponent implements OnInit {
 
   submitComment() {
     let formattedComment = this.comment
+    let taggedUsersArr = Array.from(this.taggedUsers);
     this.comment = "";
-    for(let i = this.taggedUsers.length - 1; i >= 0; i--) {
-      if(this.taggedUsers[i] !== undefined && this.taggedUsers[i] !== null) {
-        formattedComment = formattedComment.slice(0, this.tagIndices[i]) + formattedComment.slice(this.tagIndices[i]).replace(`@${this.taggedUsers[i].name}`, `<b>@${this.taggedUsers[i].name}</b>`);
+    for(let i = taggedUsersArr.length - 1; i >= 0; i--) {
+      if(taggedUsersArr[i] !== undefined && taggedUsersArr[i] !== null) {
+        formattedComment = formattedComment.slice(0, this.tagIndices[i]) + formattedComment.slice(this.tagIndices[i]).replace(`@${taggedUsersArr[i].name}`, `<b>@${taggedUsersArr[i].name}</b>`);
       }
     }
     formattedComment = formattedComment.replaceAll(' ', '&nbsp;')
     this.comments.push(formattedComment);
     this.userListEnabled = false;
-    let taggedUsersSet = new Set();
-    for(const user of this.taggedUsers) {
-      if(user !== undefined && user !== null && !taggedUsersSet.has(user.id))  {
-        taggedUsersSet.add(user.id)
+    for(const user of taggedUsersArr) {
+      if(user !== undefined && user !== null)  {
         alert(user.name + ", " + user.id)
       }
     }
-    this.taggedUsers = [];
+    this.taggedUsers = new Set();
   }
 
   updateTag(updatedTag: string) {
@@ -181,7 +180,7 @@ export class AppComponent implements OnInit {
   }
 
   finalizeTag(user: User) {
-    this.updateTag(`@${user!.name} `)
+    this.updateTag(`@${user!.name}`)
   }
 
   title = 'tagger';

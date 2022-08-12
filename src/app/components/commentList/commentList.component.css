@@ -1,14 +1,30 @@
 .commentListContainer   {
-    width: 80%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    max-height: 450px;
+    overflow: auto;
+    scrollbar-width: none;
+    border: solid 1px darkgray;
+    border-radius: 5px;
+    margin-top: 50px;
 }
 
 .commentListContainer > .comment:not(:last-child)  {
-    border-bottom: solid 1px black;
+    border-bottom: solid 1px lightgray;
+}
+.commentListContainer > .comment:nth-child(odd)  {
+    background-color: #f7faff;
+}
+
+.commentListContainer > .comment:nth-child(odd)  {
+    background-color: white;
 }
 
 .comment    {
     
+}
+
+.commentListContainer::-webkit-scrollbar   {
+    display: none;
 }

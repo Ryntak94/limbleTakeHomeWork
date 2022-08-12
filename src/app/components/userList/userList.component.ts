@@ -59,21 +59,15 @@ export class UserListComponent implements OnChanges {
 
   @HostListener('document:keydown', ['$event'])
   keydownHandler(event: any)  {
-    if(event.key === "ArrowUp") {
-      this.upHandler(event)
-    } else if(event.key === "ArrowDown")  {
-      this.downHandler(event)
-    } else if(event.key === "Enter" || event.key === "ArrowRight" || event.key === "Tab")  {
+    if(event.key === "Escape")  {
+      this.commentService.cancelTag();
+    } else if(event.key === "Enter")  {
       event.preventDefault()
       this.commentService.selectUser(this.users[this.selected]);
-    } else  if(event.key === "Escape")  {
-      this.commentService.cancelTag();
-    } else if (this.keysToIgnore.includes(event.key))  {
-      event.preventDefault();
-    } else {
-      this.commentService.updateComment(event)
+      
     }
   }
+
   ngOnChanges(changes: SimpleChanges) {
     this.updateList();
   }
