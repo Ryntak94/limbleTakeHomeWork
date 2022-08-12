@@ -44,7 +44,8 @@ export class AppComponent implements OnInit {
     {id: 8, name: 'Ian', imgSrc: 'https://i.guim.co.uk/img/media/d56cf414fd7f4681a7fc2b54c367ef6f4364a4c2/0_288_3567_3564/master/3567.jpg?width=1020&quality=85&fit=max&s=13d41921a7e7ebd4f3edd875ae69e2a4'},
     {id: 9, name: 'Adam', imgSrc: 'https://pittsburghlectures.org/wp-content/uploads/2019/02/adam-savage.jpg'},
     {id: 10, name: 'James Madison', imgSrc: 'https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_1200/MTc0NDUyOTAxOTA0MDAwNjQ2/james-madison-biography-fourth-president-of-the-united-states.jpg'},
-    {id: 11, name: 'Alexander Hamilton', imgSrc: 'https://i.guim.co.uk/img/media/611c74f4533083450171c9b974b41eacdc9ccf30/344_198_2324_1394/master/2324.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=25204c640b588165b4d5e63f711e623d'}
+    {id: 11, name: 'Alexander Hamilton', imgSrc: 'https://i.guim.co.uk/img/media/611c74f4533083450171c9b974b41eacdc9ccf30/344_198_2324_1394/master/2324.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=25204c640b588165b4d5e63f711e623d'},
+    {id: 12, name: 'Logan', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'}
   ]
   userTrie: Trie = new Trie(this.users);
   filteredUsers: User[] = this.users;

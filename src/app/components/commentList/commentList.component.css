@@ -6,6 +6,7 @@
     overflow: auto;
     scrollbar-width: none;
     border: solid 1px darkgray;
+    border-top: solid 3px darkgray;
     border-radius: 5px;
     margin-top: 50px;
 }
