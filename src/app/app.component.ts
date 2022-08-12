@@ -64,38 +64,8 @@ export class AppComponent implements OnInit {
       this.tagIndices.push(this.tagIdx!)
     })
 
-    this.commentService.emitUpdateComment.subscribe(event =>  {
-      if(event.key === "Backspace") {
-        let newTag = this.tag.slice(0, this.tag.length - 1);
-        this.updateTag(newTag);
-        this.tag = newTag;
-        
-      } else if(event.key ==="Home" || event.key === "End") {
-        this.tag = "";
-        this.tagIdx = 0;
-        this.commentBox?.nativeElement.focus();
-      } else {
-        this.updateTag(this.tag + event.key);
-        this.tag+= event.key
-
-      }
-      if(this.tag === "") {
-       this.filteredUsers = [] 
-      } else {
-        this.filteredUsers = this.userTrie.filteredList(this.tag.slice(1))
-      }
-      if(this.filteredUsers.length === 0) {
-        event.preventDefault();
-        this.commentBox?.nativeElement.focus()
-      }
-    })
-
     this.commentService.emitCancelTag.subscribe(event =>  {
       this.closeUserList(event);
-      this.commentBox?.nativeElement.focus();
-      
-      this.comment = this.comment.slice(0, this.tagIdx! + this.tag.length ) + " " + this.comment.slice(this.tagIdx! + this.tag.length)
-
     })
 
   }
@@ -128,7 +98,7 @@ export class AppComponent implements OnInit {
 
   selectCurrentTagOrNull(caretPosition: number, indices: number[][], event: any) {
     let tagging = false;
-    if(event.key === "Enter") return tagging
+    if(event.key === "Enter" || event.key === "Escape") return tagging
     for(let range of indices) {
       let [startIdx, endIdx] = range;
       if(startIdx < caretPosition && caretPosition <= endIdx) {
@@ -183,7 +153,6 @@ export class AppComponent implements OnInit {
   }
 
   closeUserList(event: any) {
-    console.log(event)
     this.userListEnabled = false;
   }
 
