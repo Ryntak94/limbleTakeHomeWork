@@ -45,7 +45,18 @@ export class AppComponent implements OnInit {
     {id: 9, name: 'Adam', imgSrc: 'https://pittsburghlectures.org/wp-content/uploads/2019/02/adam-savage.jpg'},
     {id: 10, name: 'James Madison', imgSrc: 'https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_1200/MTc0NDUyOTAxOTA0MDAwNjQ2/james-madison-biography-fourth-president-of-the-united-states.jpg'},
     {id: 11, name: 'Alexander Hamilton', imgSrc: 'https://i.guim.co.uk/img/media/611c74f4533083450171c9b974b41eacdc9ccf30/344_198_2324_1394/master/2324.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=25204c640b588165b4d5e63f711e623d'},
-    {id: 12, name: 'Logan', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'}
+    {id: 12, name: 'Logan', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'},
+    {id: 13, name: 'Logana', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'},
+    {id: 14, name: 'Loganb', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'},
+    {id: 15, name: 'Loganc', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'},
+    {id: 16, name: 'Logand', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'},
+    {id: 17, name: 'Logane', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'},
+    {id: 18, name: 'Loganf', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'},
+    {id: 19, name: 'Logang', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'},
+    {id: 20, name: 'Loganh', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'},
+    {id: 21, name: 'Logani', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'},
+    {id: 22, name: 'Loganj', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'},
+    {id: 23, name: 'Logank', imgSrc: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/01/21/17/Hugh-Jackman.jpg?width=1200'}
   ]
   userTrie: Trie = new Trie(this.users);
   filteredUsers: User[] = this.users;
@@ -120,8 +131,7 @@ export class AppComponent implements OnInit {
       this.closeUserList(event);
       this.commentBox?.nativeElement.focus()
     }
-      this.checkForTaggingUser(event);
-
+    this.checkForTaggingUser(event);
   }
 
   submitComment() {

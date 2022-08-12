@@ -69,11 +69,7 @@ export class UserListComponent implements OnChanges {
 
   upHandler(event: any)  {
     event.preventDefault()
-    if(this.selected === 0) {
-      this.displayedSelected = 4
-      this.selected = this.users.length - 1;
-      this.displayedRange = [this.users.length - 5, this.users.length]
-    } else {
+    if(this.selected !== 0) {
       this.selected--;
       if(this.displayedSelected === 0)  {
         this.displayedRange[0]--
@@ -87,11 +83,7 @@ export class UserListComponent implements OnChanges {
 
   downHandler(event: any) {
     event.preventDefault()
-    if(this.selected === this.users.length - 1) {
-      this.displayedSelected = 0
-      this.selected = 0;
-      this.displayedRange = [0, 5]
-    } else {
+    if(this.selected !== this.users.length - 1) {
       this.selected++;
       if(this.displayedSelected === 4)  {
         this.displayedRange[0]++
