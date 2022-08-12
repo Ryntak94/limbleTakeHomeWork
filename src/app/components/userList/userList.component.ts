@@ -15,41 +15,13 @@ export class UserListComponent implements OnChanges {
   public selected: number = 0;
   public displayedSelected: number = 0;
   public displayedRange: number[] = [0,5]
-  public keysToIgnore: string[] = [
-    "F1",
-    "F2",
-    "F3",
-    "F4",
-    "F6",
-    "F7",
-    "F8",
-    "F9",
-    "F10",
-    "F11",
-    "F12",
-    "Scrolllock",
-    "PageUp",
-    "PageDown",
-    "CapsLock",
-    "Alt",
-    "Control",
-    "Pause",
-    "Shift",
-    "ContextMenu",
-    "Meta",
-    "Delete",
-    "ArrowLeft",
-    "Insert"
-  ]
+  public hovered : number | null = null;
 
-  constructor(private commentService: CommentService) {
-
-  }
+  constructor(private commentService: CommentService) {}
 
   @HostListener('wheel', ['$event'])
   scrollHandler(event: any)  {
     event.preventDefault();
-    console.log(event.deltaY);
     if(event.deltaY < 0) {
       this.upHandler(event)
     } else {
@@ -60,37 +32,34 @@ export class UserListComponent implements OnChanges {
 
   @HostListener('document:keydown', ['$event'])
   keydownHandler(event: any)  {
-    if(event.key === "ArrowUp") {
-      this.upHandler(event)
-    } else if(event.key === "ArrowDown")  {
-      this.downHandler(event)
-    } else if(event.key === "Enter" || event.key === "ArrowRight" || event.key === "Tab")  {
+    if(event.key === "Escape")  {
+      this.commentService.cancelTag();
+    } else if(event.key === "Enter")  {
       event.preventDefault()
       this.commentService.selectUser(this.users[this.selected]);
-    } else  if(event.key === "Escape")  {
-      this.commentService.cancelTag();
-    } else if (this.keysToIgnore.includes(event.key))  {
-      event.preventDefault();
-    } else {
-      console.log('here')
-      this.commentService.updateComment(event)
+      
     }
   }
+
   ngOnChanges(changes: SimpleChanges) {
     this.updateList();
+  }
+
+  ngOnDestroy() {
+    this.commentService.selectUser(this.displayedUsers![this.hovered!]);
+  }
+
+  hoverHandler(event: any)  {
+    this.hovered = event.currentTarget.id;
+    
   }
 
   updateList()  {
     if(this.users.length < 5) {
       this.displayedRange = [0, 5]
-      this.displayedSelected = this.selected
+      this.displayedSelected = this.selected;
     }
       this.displayedUsers = this.users.slice(this.displayedRange[0], this.displayedRange[1]);
-  }
-
-  tagUser(event: any) {
-    let userIndx = event.currentTarget.id
-    this.commentService.selectUser(this.users[userIndx]);
   }
 
   upHandler(event: any)  {
@@ -128,4 +97,5 @@ export class UserListComponent implements OnChanges {
     }
     this.updateList()
   }
+
 }

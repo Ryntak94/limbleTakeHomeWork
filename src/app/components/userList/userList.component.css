@@ -3,18 +3,20 @@
     flex-direction: column;
     width: 200px;
     text-align: end;
-    position: fixed;
+    position: absolute;
     background-color: white;
     max-height: 150px;
     overflow-y: auto;
     scrollbar-width: none;
-    transform: translate(-201%, -100%);
+    transform: translate(-196.8%, -100%);
+    margin-top: 2.75%;
     opacity: 100%;
     border: solid 1px lightgrey;
     border-top-left-radius:  5px;
     border-top-right-radius: 5px;
     
 }
+
 .userList::-webkit-scrollbar   {
     display: none;
 }
@@ -26,11 +28,12 @@
     align-items: center;
 }
 
-.user:hover {
-    cursor: pointer;
-    background-color: #17617c;
+.user:not(:last-child)  {
+    border-bottom: solid 1px lightgray;
 }
 
-.selected {
-    background-color: #2596be;
+.user:hover {
+    cursor: pointer;
+    background: rgb(255,153,0);
+    background: linear-gradient(90deg, rgba(255,153,0,1) 5%, rgba(255,255,255,1) 5%);
 }
