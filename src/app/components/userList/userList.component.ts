@@ -50,7 +50,12 @@ export class UserListComponent implements OnChanges {
   }
 
   hoverHandler(event: any)  {
-    this.hovered = event.currentTarget.id;
+    if(event.type === "mouseout") {
+      this.hovered = null
+    } else  {
+
+      this.hovered = event.currentTarget.id;
+    }
     
   }
 

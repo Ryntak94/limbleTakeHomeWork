@@ -1,3 +1,3 @@
 <div class="userList">
-    <app-user *ngFor="let user of displayedUsers; let i = index" [user]="user" class="user" (mouseover)="hoverHandler($event)" id="{{i}}"></app-user>
+    <app-user *ngFor="let user of displayedUsers; let i = index" [user]="user" class="user" (mouseover)="hoverHandler($event)" (mouseout)="hoverHandler($event)" id="{{i}}"></app-user>
 </div>
