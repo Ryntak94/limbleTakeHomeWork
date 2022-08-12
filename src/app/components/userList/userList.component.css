@@ -8,7 +8,8 @@
     max-height: 150px;
     overflow-y: auto;
     scrollbar-width: none;
-    transform: translate(-199%, -90%);
+    transform: translateY(-100%);
+    margin-top: .60%;
     opacity: 100%;
     border: solid 1px lightgrey;
     border-top-left-radius:  5px;
@@ -28,5 +29,7 @@
 
 .user:hover {
     cursor: pointer;
-    background-color: #f90;
+    /* background-color: #f90; */
+    background: rgb(255,153,0);
+    background: linear-gradient(90deg, rgba(255,153,0,1) 5%, rgba(255,255,255,1) 5%);
 }
