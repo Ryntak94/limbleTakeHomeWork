@@ -167,7 +167,7 @@ export class AppComponent implements OnInit {
     this.comments.push(formattedComment);
     this.closeUserList(event);
     for(const user of taggedUsersArr) {
-      if(user !== undefined && user !== null)  {
+      if(user !== undefined && user !== null && formattedComment.includes(user.name))  {
         alert(user.name + ", " + user.id)
       }
     }
