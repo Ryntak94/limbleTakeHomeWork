@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
 
     this.commentService.userSelected.subscribe(user =>  {
       if(user) this.finalizeTag(user);
-      this.closeUserList();
+      this.closeUserList(event);
       this.commentBox?.nativeElement.focus();
       if(!this.taggedUsers.has(user)) this.taggedUsers.add(user)
       this.tagIndices.push(this.tagIdx!)
@@ -91,7 +91,7 @@ export class AppComponent implements OnInit {
     })
 
     this.commentService.emitCancelTag.subscribe(event =>  {
-      this.closeUserList();
+      this.closeUserList(event);
       this.commentBox?.nativeElement.focus();
       
       this.comment = this.comment.slice(0, this.tagIdx! + this.tag.length ) + " " + this.comment.slice(this.tagIdx! + this.tag.length)
@@ -113,7 +113,7 @@ export class AppComponent implements OnInit {
     }
 
     if(indices.length > 0) tagging = this.selectCurrentTagOrNull(caretPosition, indices, event);
-    if(!tagging) this.closeUserList();
+    if(!tagging) this.closeUserList(event);
   }
 
   getIndices(tags: string[])  {
@@ -147,7 +147,7 @@ export class AppComponent implements OnInit {
 
   refocusOnClick(event: any) {
     if(this.userListEnabled) {
-      this.closeUserList();
+      this.closeUserList(event);
       this.commentBox?.nativeElement.focus()
     }
       this.checkForTaggingUser(event);
@@ -165,7 +165,7 @@ export class AppComponent implements OnInit {
     }
     formattedComment = formattedComment.replaceAll(' ', '&nbsp;')
     this.comments.push(formattedComment);
-    this.closeUserList();
+    this.closeUserList(event);
     for(const user of taggedUsersArr) {
       if(user !== undefined && user !== null)  {
         alert(user.name + ", " + user.id)
@@ -182,9 +182,10 @@ export class AppComponent implements OnInit {
     this.updateTag(`@${user!.name}`)
   }
 
-  closeUserList() {
+  closeUserList(event: any) {
+    console.log(event)
     this.userListEnabled = false;
   }
 
-  title = 'tagger';
+  title = 'Tagger';
 }

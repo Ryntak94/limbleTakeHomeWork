@@ -15,36 +15,9 @@ export class UserListComponent implements OnChanges {
   public selected: number = 0;
   public displayedSelected: number = 0;
   public displayedRange: number[] = [0,5]
-  public keysToIgnore: string[] = [
-    "F1",
-    "F2",
-    "F3",
-    "F4",
-    "F6",
-    "F7",
-    "F8",
-    "F9",
-    "F10",
-    "F11",
-    "F12",
-    "Scrolllock",
-    "PageUp",
-    "PageDown",
-    "CapsLock",
-    "Alt",
-    "Control",
-    "Pause",
-    "Shift",
-    "ContextMenu",
-    "Meta",
-    "Delete",
-    "ArrowLeft",
-    "Insert"
-  ]
+  public hovered : number | null = null;
 
-  constructor(private commentService: CommentService) {
-
-  }
+  constructor(private commentService: CommentService) {}
 
   @HostListener('wheel', ['$event'])
   scrollHandler(event: any)  {
@@ -72,17 +45,21 @@ export class UserListComponent implements OnChanges {
     this.updateList();
   }
 
+  ngOnDestroy() {
+    this.commentService.selectUser(this.displayedUsers![this.hovered!]);
+  }
+
+  hoverHandler(event: any)  {
+    this.hovered = event.currentTarget.id;
+    
+  }
+
   updateList()  {
     if(this.users.length < 5) {
       this.displayedRange = [0, 5]
-      this.displayedSelected = this.selected
+      this.displayedSelected = this.selected;
     }
       this.displayedUsers = this.users.slice(this.displayedRange[0], this.displayedRange[1]);
-  }
-
-  tagUser(event: any) {
-    let userIndx = event.currentTarget.id
-    this.commentService.selectUser(this.users[userIndx]);
   }
 
   upHandler(event: any)  {
@@ -120,4 +97,5 @@ export class UserListComponent implements OnChanges {
     }
     this.updateList()
   }
+
 }
